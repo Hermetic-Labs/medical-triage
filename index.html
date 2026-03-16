@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Hermetic Labs Triage — Field Medical Coordination | Hermetic Labs</title>
+<meta name="description" content="A complete, free, offline medical coordination system for conflict zones. Help us get it into the right hands."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#000;--near:#080808;--card:#0d0d0d;
+  --border:rgba(255,255,255,.08);--teal:#45B191;
+  --teal-glow:rgba(69,177,145,.15);--white:#fff;
+  --gray:#a0a0a0;--lgray:#d0d0d0;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:flex-end;padding:14px 48px;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-logo img{height:34px;width:auto}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.nav-donate{background:var(--teal)!important;color:#000!important;padding:8px 20px;border-radius:4px;font-weight:700!important;transition:background .2s,transform .15s!important}
+.nav-donate:hover{background:#57cca9!important;transform:translateY(-1px)}
+
+/* LANG TICKER */
+.ticker-wrap{position:absolute;top:0;left:0;right:0;height:36px;overflow:hidden;background:rgba(69,177,145,.06);border-bottom:1px solid var(--border);display:flex;align-items:center}
+.ticker{display:flex;gap:32px;white-space:nowrap;animation:ticker 50s linear infinite;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--teal);opacity:.7}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* HERO */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px 50px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url('hero_field_medical.png') center/cover no-repeat;opacity:.18;z-index:0}
+.hero-bg-fade{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3) 0%,rgba(0,0,0,.7) 60%,#000 100%);z-index:1}
+.hero-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:650px;height:650px;background:radial-gradient(ellipse at center,rgba(69,177,145,.13) 0%,transparent 70%);pointer-events:none;z-index:2;animation:breathe 6s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+.hero>*:not(.hero-bg):not(.hero-bg-fade):not(.hero-glow):not(.ticker-wrap):not(.hero-scroll){position:relative;z-index:3}
+.hero-eyebrow{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:flex;align-items:center;justify-content:center;gap:12px}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';display:block;width:24px;height:1px;background:var(--teal)}
+/* LOGO HERO */
+.hero-logo{display:block;margin:-20px auto 0;height:620px;width:auto;filter:brightness(2.2) contrast(1.3) drop-shadow(0 0 20px rgba(69,177,145,1)) drop-shadow(0 0 50px rgba(69,177,145,.7)) drop-shadow(0 0 80px rgba(255,255,255,.3))}
+/* HALT BADGE ROW */
+.hero-badge{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:-10px;margin-bottom:16px}
+.halt-icon{height:clamp(64px,8vw,100px);width:auto;max-width:min(160px,30vw);object-fit:contain;filter:drop-shadow(0 0 14px rgba(69,177,145,.9)) drop-shadow(0 0 36px rgba(69,177,145,.5));animation:breathe 6s ease-in-out infinite;flex-shrink:0}
+.badge-label{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.badge-label .badge-top{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.26em;text-transform:uppercase;color:var(--teal)}
+.badge-label .badge-bottom{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:rgba(69,177,145,.6);white-space:nowrap}
+h1.hero-h1{font-family:'Montserrat',sans-serif;font-size:clamp(32px,5.5vw,70px);font-weight:900;letter-spacing:-.01em;line-height:1.05;color:var(--white);margin-bottom:10px}
+h1.hero-h1 .hl{color:var(--teal);display:block}
+.hero-sub{font-family:'Montserrat',sans-serif;font-size:clamp(12px,1.8vw,16px);font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:16px}
+.hero-desc{max-width:640px;font-size:17px;line-height:1.8;color:var(--lgray);margin-bottom:32px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+.hero-download{display:inline-flex;align-items:center;gap:8px;color:var(--gray);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:color .2s;position:relative;z-index:3}
+.hero-download:hover{color:var(--teal)}
+.hero-download::before{content:'↓';font-size:14px}
+/* DOWNLOAD CARD */
+.dl-card{margin-top:64px;padding:40px 48px;border:1px solid rgba(69,177,145,.3);border-radius:10px;background:linear-gradient(135deg,rgba(69,177,145,.08),rgba(69,177,145,.03));display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.dl-card-text .dl-title{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--white);margin-bottom:8px}
+.dl-card-text .dl-sub{font-size:14px;color:var(--gray);line-height:1.6;max-width:480px}
+.btn-dl{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--teal);border:2px solid var(--teal);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:15px 32px;border-radius:4px;white-space:nowrap;transition:background .2s,color .2s,transform .15s,box-shadow .2s}
+.btn-dl:hover{background:var(--teal);color:#000;transform:translateY(-2px);box-shadow:0 0 30px rgba(69,177,145,.4)}
+.btn-p{display:inline-flex;align-items:center;gap:9px;background:var(--teal);color:#000;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:17px 38px;border-radius:4px;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(69,177,145,.3)}
+.btn-p:hover{background:#5dd5ad;transform:translateY(-2px);box-shadow:0 0 48px rgba(69,177,145,.5)}
+.btn-s{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:17px 34px;border-radius:4px;border:1px solid rgba(255,255,255,.2);transition:border-color .2s,color .2s,transform .15s}
+.btn-s:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.hero-scroll{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:7px;color:var(--gray);font-size:10px;letter-spacing:.2em;text-transform:uppercase;font-family:'Montserrat',sans-serif;animation:scrollhint 2s ease-in-out infinite;z-index:3}
+.hero-scroll span{width:1px;height:38px;background:linear-gradient(to bottom,var(--teal),transparent);display:block}
+@keyframes scrollhint{0%,100%{opacity:.4;transform:translateX(-50%) translateY(0)}50%{opacity:.9;transform:translateX(-50%) translateY(5px)}}
+
+/* STAT BAR */
+.statbar{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:var(--card);padding:44px 24px}
+.statgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:36px;max-width:1080px;margin:0 auto;text-align:center}
+.stat-n{font-family:'Montserrat',sans-serif;font-size:clamp(30px,5vw,52px);font-weight:900;color:var(--teal);letter-spacing:-.02em;line-height:1;margin-bottom:7px}
+.stat-l{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gray)}
+
+/* SHARED SECTION */
+section{position:relative;z-index:1;padding:88px 24px}
+.container{max-width:1080px;margin:0 auto}
+.sec-label{font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:11px}
+.sec-label::before{content:'';display:inline-block;width:26px;height:1px;background:var(--teal)}
+.sec-title{font-family:'Montserrat',sans-serif;font-size:clamp(26px,4vw,44px);font-weight:900;letter-spacing:-.01em;color:var(--white);margin-bottom:18px;line-height:1.1}
+.sec-body{font-size:17px;color:var(--lgray);max-width:670px;line-height:1.8}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--teal),transparent);opacity:.25;margin:0}
+
+/* PROBLEM GRID */
+.prob-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1px;margin-top:60px;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.prob-item{background:var(--card);padding:34px 26px;transition:background .2s}
+.prob-item:hover{background:#111}
+.prob-icon{font-size:26px;margin-bottom:14px;display:block}
+.prob-t{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:7px}
+.prob-d{font-size:14px;color:var(--gray);line-height:1.65}
+
+/* IMAGE BREAK */
+.img-break{width:100%;max-height:480px;object-fit:cover;display:block;opacity:.75;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:22px;margin-top:60px}
+.feat-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:34px 30px;transition:border-color .2s,transform .2s;position:relative;overflow:hidden}
+.feat-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),transparent);opacity:0;transition:opacity .3s}
+.feat-card:hover{border-color:rgba(69,177,145,.3);transform:translateY(-3px)}
+.feat-card:hover::after{opacity:1}
+.feat-emoji{font-size:30px;margin-bottom:18px;display:block}
+.feat-t{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.feat-d{font-size:14px;color:var(--gray);line-height:1.7}
+
+/* IMAGE + TEXT SPLIT */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-top:0}
+.split img{width:100%;border-radius:8px;border:1px solid var(--border);opacity:.82}
+@media(max-width:768px){.split{grid-template-columns:1fr}}
+
+/* WHO GRID */
+.who-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:60px}
+.who-card{border:1px solid var(--border);border-radius:8px;padding:30px 26px;background:var(--card);transition:border-color .2s}
+.who-card:hover{border-color:rgba(69,177,145,.25)}
+.who-sc{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--white);margin-bottom:9px}
+.who-h{font-size:14px;color:var(--gray);line-height:1.65}
+
+/* LANGUAGES */
+.lang-section{border-top:1px solid var(--border);text-align:center}
+.lang-globe-img{width:100%;max-width:480px;display:block;margin:48px auto 40px;border-radius:12px;opacity:.9}
+.lang-bubbles{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;max-width:880px;margin:0 auto}
+.lang-bubble{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.07em;color:var(--gray);transition:border-color .2s,color .2s,background .2s;cursor:default}
+.lang-bubble.has-logo{cursor:pointer}
+.lang-bubble.has-logo:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-glow)}
+.lang-bubble.native{font-size:13px;color:var(--white);font-weight:400;font-family:'Inter',sans-serif;letter-spacing:0}
+.lang-bubble.native.has-logo:hover{border-color:var(--teal);color:var(--teal)}
+
+/* LANG MODAL */
+.lang-modal{display:none;position:fixed;inset:0;z-index:500;align-items:center;justify-content:center;padding:24px}
+.lang-modal.open{display:flex}
+.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(8px)}
+.modal-box{position:relative;z-index:1;background:#0f0f0f;border:1px solid rgba(69,177,145,.3);border-radius:12px;padding:48px 56px;text-align:center;max-width:560px;width:100%;box-shadow:0 0 60px rgba(69,177,145,.15)}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--gray);font-size:22px;cursor:pointer;line-height:1;transition:color .2s}
+.modal-close:hover{color:var(--white)}
+.modal-lang-name{font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--teal);margin-bottom:28px}
+.modal-img{max-width:100%;max-height:220px;object-fit:contain;filter:brightness(1.05)}
+.modal-native{margin-top:20px;font-size:20px;color:var(--lgray);font-family:'Inter',sans-serif}
+
+/* WHY NOW */
+.why-section{border-top:1px solid var(--border);background:linear-gradient(180deg,transparent,rgba(69,177,145,.04) 50%,transparent)}
+.zone-tags{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}
+.zone{background:rgba(192,57,43,.12);border:1px solid rgba(192,57,43,.3);color:#e74c3c;padding:5px 15px;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.why-quote{margin-top:52px;border-left:3px solid var(--teal);padding-left:30px;max-width:660px}
+.why-quote p{font-size:18px;line-height:1.72;color:var(--lgray);font-style:italic}
+
+/* COST */
+.cost-section{border-top:1px solid var(--border);text-align:center}
+.cost-box{display:inline-block;margin-top:38px;padding:48px 68px;border:1px solid rgba(69,177,145,.28);border-radius:12px;background:var(--teal-glow);max-width:660px}
+.cost-big{font-family:'Montserrat',sans-serif;font-size:clamp(52px,10vw,96px);font-weight:900;color:var(--teal);letter-spacing:-.03em;line-height:1;margin-bottom:14px}
+.cost-sub{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray);margin-bottom:20px}
+.cost-copy{font-size:16px;color:var(--lgray);line-height:1.7}
+
+/* DONATE */
+.donate-section{border-top:1px solid var(--border);text-align:center;padding:110px 24px;background:linear-gradient(180deg,transparent,rgba(69,177,145,.05))}
+.donate-section .sec-label{justify-content:center}
+.donate-section .sec-title{max-width:620px;margin:0 auto 18px}
+.donate-section .sec-body{max-width:540px;margin:0 auto 48px}
+.amounts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:18px}
+.chip{background:var(--card);border:1px solid var(--border);color:var(--white);padding:11px 26px;border-radius:4px;font-family:'Montserrat',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:border-color .2s,background .2s,color .2s}
+.chip:hover,.chip.active{border-color:var(--teal);background:var(--teal-glow);color:var(--teal)}
+.custom-row{display:flex;align-items:center;gap:0;margin-bottom:36px;max-width:320px;margin-left:auto;margin-right:auto;border:1px solid var(--border);border-radius:4px;overflow:hidden;transition:border-color .2s}
+.custom-row:focus-within{border-color:var(--teal)}
+.custom-prefix{background:var(--card);color:var(--teal);padding:12px 16px;font-family:'Montserrat',sans-serif;font-size:16px;font-weight:700;border-right:1px solid var(--border)}
+.custom-input{flex:1;background:var(--card);border:none;outline:none;color:var(--white);font-family:'Montserrat',sans-serif;font-size:15px;font-weight:600;padding:12px 14px}
+.custom-input::placeholder{color:#555}
+.cta-wrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.donate-note{font-size:12px;color:var(--gray);letter-spacing:.04em}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;position:relative;z-index:1}
+.footer-logo img{height:26px;opacity:.65;margin-bottom:18px}
+.footer-tag{font-size:13px;color:var(--gray);font-style:italic;max-width:480px;margin:0 auto 22px;line-height:1.6}
+.footer-links{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.footer-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
+.footer-links a:hover{color:var(--teal)}
+.footer-copy{font-size:12px;color:#3a3a3a}
+
+/* FADE IN */
+.fi{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.fi.vis{opacity:1;transform:translateY(0)}
+
+@media(max-width:900px){.hero-logo{height:clamp(320px,55vw,520px)}}
+@media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate){display:none}section{padding:68px 18px}.cost-box{padding:36px 24px}.hero-logo{height:clamp(220px,48vw,380px)}}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-links">
+    <a href="#problem">The Problem</a>
+    <a href="#solution">The Solution</a>
+    <a href="#languages">42 Languages</a>
+    <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="nav-donate">Donate Now</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="ticker-wrap">
+    <div class="ticker">ARABIC &nbsp;·&nbsp; FARSI &nbsp;·&nbsp; PASHTO &nbsp;·&nbsp; KURDISH &nbsp;·&nbsp; UKRAINIAN &nbsp;·&nbsp; RUSSIAN &nbsp;·&nbsp; AMHARIC &nbsp;·&nbsp; SOMALI &nbsp;·&nbsp; SWAHILI &nbsp;·&nbsp; HAUSA &nbsp;·&nbsp; YORUBA &nbsp;·&nbsp; FRENCH &nbsp;·&nbsp; SPANISH &nbsp;·&nbsp; CHINESE &nbsp;·&nbsp; HINDI &nbsp;·&nbsp; BENGALI &nbsp;·&nbsp; BURMESE &nbsp;·&nbsp; KHMER &nbsp;·&nbsp; THAI &nbsp;·&nbsp; VIETNAMESE &nbsp;·&nbsp; JAPANESE &nbsp;·&nbsp; KOREAN &nbsp;·&nbsp; TAGALOG &nbsp;·&nbsp; PORTUGUESE &nbsp;·&nbsp; GERMAN &nbsp;·&nbsp; ITALIAN &nbsp;·&nbsp; DUTCH &nbsp;·&nbsp; POLISH &nbsp;·&nbsp; TURKISH &nbsp;·&nbsp; INDONESIAN &nbsp;·&nbsp; URDU &nbsp;·&nbsp; TAMIL &nbsp;·&nbsp; TELUGU &nbsp;·&nbsp; MARATHI &nbsp;·&nbsp; IGBO &nbsp;·&nbsp; XHOSA &nbsp;·&nbsp; ZULU &nbsp;·&nbsp; ARABIC &nbsp;·&nbsp; FARSI &nbsp;·&nbsp; PASHTO &nbsp;·&nbsp; KURDISH &nbsp;·&nbsp; UKRAINIAN &nbsp;·&nbsp; RUSSIAN &nbsp;·&nbsp; AMHARIC &nbsp;·&nbsp; SOMALI &nbsp;·&nbsp; SWAHILI &nbsp;·&nbsp; HAUSA &nbsp;·&nbsp; YORUBA &nbsp;·&nbsp; FRENCH &nbsp;·&nbsp; SPANISH &nbsp;·&nbsp; CHINESE &nbsp;·&nbsp; HINDI &nbsp;·&nbsp; BENGALI &nbsp;·&nbsp; BURMESE &nbsp;·&nbsp; KHMER &nbsp;·&nbsp; THAI &nbsp;·&nbsp; VIETNAMESE &nbsp;·&nbsp; JAPANESE &nbsp;·&nbsp; KOREAN &nbsp;·&nbsp; TAGALOG &nbsp;·&nbsp; PORTUGUESE &nbsp;·&nbsp; GERMAN &nbsp;·&nbsp; ITALIAN &nbsp;·&nbsp; DUTCH &nbsp;·&nbsp; POLISH &nbsp;·&nbsp; TURKISH &nbsp;·&nbsp; INDONESIAN &nbsp;·&nbsp; URDU &nbsp;·&nbsp; TAMIL &nbsp;·&nbsp; TELUGU &nbsp;·&nbsp; MARATHI &nbsp;·&nbsp; IGBO &nbsp;·&nbsp; XHOSA &nbsp;·&nbsp; ZULU</div>
+  </div>
+  <div class="hero-bg"></div>
+  <div class="hero-bg-fade"></div>
+  <div class="hero-glow"></div>
+  <img src="English/1BANNER_transparent.png" alt="Hermetic Labs" class="hero-logo"/>
+  <h1 class="hero-h1">When Every Second Counts,<span class="hl">Language Shouldn't Be the Barrier.</span></h1>
+  <p class="hero-sub">Field Medical Coordination &nbsp;—&nbsp; Anywhere on Earth</p>
+  <p class="hero-desc">A complete, free, offline medical coordination system built for conflict zones, disaster response, and the places the world forgets. No internet. No subscriptions. No servers. Just a laptop — and the people who need it most.</p>
+  <div class="hero-ctas">
+    <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="btn-p">♥ &nbsp;Donate to the Cause</a>
+    <a href="#solution" class="btn-s">Learn How It Works →</a>
+  </div>
+  <a href="https://github.com/Hermetic-Labs/medical-triage" target="_blank" class="hero-download" id="heroDownloadBtn">Free Download — Hermetic Labs Triage (HALT)</a>
+  <div class="hero-scroll"><span></span>Scroll</div>
+</section>
+
+<!-- STAT BAR -->
+<div class="statbar">
+  <div class="statgrid">
+    <div><div class="stat-n">42</div><div class="stat-l">Languages Supported</div></div>
+    <div><div class="stat-n">60s</div><div class="stat-l">Patient Intake Time</div></div>
+    <div><div class="stat-n">0</div><div class="stat-l">Internet Required</div></div>
+    <div><div class="stat-n">$0</div><div class="stat-l">Cost to Deploy</div></div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section id="problem">
+  <div class="container">
+    <div class="sec-label fi">The Crisis on the Ground</div>
+    <h2 class="sec-title fi">In Conflict Zones, Medical Teams Face Impossible Odds</h2>
+    <p class="sec-body fi">In Yemen, Sudan, Gaza, Ukraine, Myanmar, and the DRC — medical infrastructure is being destroyed faster than it can be rebuilt. Teams work with paper, whiteboards, and shouted handoffs. And language barriers between volunteers and patients cost lives every single day.</p>
+    <div class="prob-grid">
+      <div class="prob-item fi"><span class="prob-icon">📵</span><div class="prob-t">No Internet</div><div class="prob-d">Cell towers down. Infrastructure destroyed. Tools that need a connection are useless.</div></div>
+      <div class="prob-item fi"><span class="prob-icon">🗣️</span><div class="prob-t">No Shared Language</div><div class="prob-d">Patients, medics, and translators speak different languages. Miscommunication costs lives.</div></div>
+      <div class="prob-item fi"><span class="prob-icon">📄</span><div class="prob-t">No Records</div><div class="prob-d">Paper charts get lost, wet, burned. Shift handoffs are verbal. Patients fall through the cracks.</div></div>
+      <div class="prob-item fi"><span class="prob-icon">⏱️</span><div class="prob-t">No Time</div><div class="prob-d">Triage decisions happen in seconds. Volunteers with basic training make calls they've never trained for.</div></div>
+      <div class="prob-item fi"><span class="prob-icon">🗺️</span><div class="prob-t">No Coordination</div><div class="prob-d">Who is where. What supplies remain. Which patients are critical. Nobody has the full picture.</div></div>
+      <div class="prob-item fi"><span class="prob-icon">💊</span><div class="prob-t">No Clinical Support</div><div class="prob-d">Specialists aren't available. Remote field hospitals operate without diagnostic guidance.</div></div>
+    </div>
+  </div>
+</section>
+
+<img src="hero_field_medical.png" class="img-break" alt="Field medic treating a patient in a makeshift hospital tent"/>
+
+<!-- SOLUTION -->
+<section id="solution">
+  <div class="container">
+    <div class="sec-label fi">The Solution</div>
+    <h2 class="sec-title fi">Every Problem Has Been Solved. Right Here.</h2>
+    <div class="split" style="margin-top:48px">
+      <div>
+        <p class="sec-body fi" style="max-width:100%;display:flex;flex-direction:column;align-items:center;gap:18px">
+          <img src="halt transparent.png" alt="HALT" class="halt-icon"/>
+          <span>Hermetic Labs Triage (<strong style="color:var(--teal)">HALT</strong> — <em>Hermetic Anonymous Local Triage</em>) is a <strong style="color:var(--white)">working system</strong> — not a prototype, not a concept. It runs today, on a single laptop, with no internet, in 42 languages. One laptop can coordinate an entire field hospital.</span>
+        </p>
+        <p class="sec-body fi" style="max-width:100%;margin-top:20px">The code is ready. The system is ready. It just needs to get into the right hands.</p>
+      </div>
+      <img src="laptop_field.png" alt="Laptop running triage software in a field hospital tent" class="fi"/>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card fi"><span class="feat-emoji">🏥</span><div class="feat-t">60-Second Patient Intake</div><div class="feat-d">A guided 6-step flow walks any medic — trained or volunteer — through capturing injuries and vitals, then automatically generates a treatment plan using military MARCH protocol.</div></div>
+      <div class="feat-card fi"><span class="feat-emoji">🗺️</span><div class="feat-t">Live Ward Map</div><div class="feat-d">A real-time visual map of every patient in every room. Color-coded by severity. Drag-and-drop movement. One glance gives you the full picture of an entire field hospital.</div></div>
+      <div class="feat-card fi"><span class="feat-emoji">🌍</span><div class="feat-t">42 Languages — Instantly</div><div class="feat-d">Every button, label, clinical term, and treatment instruction works in 42 languages. Switch with a single dropdown. No delay. No internet required.</div></div>
+      <div class="feat-card fi"><span class="feat-emoji">🗣️</span><div class="feat-t">Voice in Every Language</div><div class="feat-d">A text-to-speech engine that speaks all 42 languages — even those the model was never trained on, through a novel phoneme-based synthesis approach.</div></div>
+      <div class="feat-card fi"><span class="feat-emoji">🤖</span><div class="feat-t">On-Device Medical AI</div><div class="feat-d">Powered by Google's MedGemma — differential diagnosis, drug interaction warnings, clinical decision support. Runs entirely locally. No cloud. No data leaves the machine.</div></div>
+      <div class="feat-card fi"><span class="feat-emoji">💬</span><div class="feat-t">Real-Time Communication</div><div class="feat-d">Video calls between medics over local mesh. Text messaging with auto-translation. Voice notes that transcribe and translate. All without internet.</div></div>
+      <div class="feat-card fi"><span class="feat-emoji">📦</span><div class="feat-t">Supply Tracking</div><div class="feat-d">Real-time inventory across all locations with automatic low-stock warnings and consumption pattern tracking.</div></div>
+      <div class="feat-card fi"><span class="feat-emoji">✈️</span><div class="feat-t">Fully Offline</div><div class="feat-d">The entire system — AI, translation, voice, records — runs on a single laptop. Deploy under active bombardment where connectivity is impossible.</div></div>
+    </div>
+
+    <!-- DOWNLOAD CARD -->
+    <div class="dl-card fi">
+      <div class="dl-card-text">
+        <div class="dl-title">↓ &nbsp;Download Hermetic Labs Triage (HALT) — Free</div>
+        <div class="dl-sub">The system is real. It runs today. Download it and see for yourself — works on Windows, Mac, and Linux. No account required.</div>
+      </div>
+      <a href="https://github.com/Hermetic-Labs/medical-triage" target="_blank" id="solutionDownloadBtn" class="btn-dl">↓ &nbsp;Free Download</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO -->
+<section id="who">
+  <div class="container">
+    <div class="sec-label fi">Who It Serves</div>
+    <h2 class="sec-title fi">Built for the Hardest Places on Earth</h2>
+    <p class="sec-body fi">Wherever a medical team works without infrastructure, without specialists, or without a shared language — this system was built for them.</p>
+    <div class="who-grid">
+      <div class="who-card fi"><div class="who-sc">⚔️ Field Hospitals in Active Conflict</div><div class="who-h">Triage, track, and treat patients with automatic protocols — even with volunteer staff who aren't trained medics.</div></div>
+      <div class="who-card fi"><div class="who-sc">🏕️ Refugee Camps</div><div class="who-h">Overcome language barriers instantly. Medical records that follow the patient wherever they go.</div></div>
+      <div class="who-card fi"><div class="who-sc">🌊 Disaster Response</div><div class="who-h">Deploy on a laptop within minutes after an earthquake, flood, or hurricane. Coordinate with zero infrastructure.</div></div>
+      <div class="who-card fi"><div class="who-sc">🎖️ Military Medical Units</div><div class="who-h">MARCH protocol built in. Hemorrhage classification, shock index calculation, NATO triage category support.</div></div>
+      <div class="who-card fi"><div class="who-sc">🌐 NGO Medical Teams</div><div class="who-h">A free, open tool that works in any language their patients speak — from MSF to WHO to independent groups.</div></div>
+      <div class="who-card fi"><div class="who-sc">🏥 Remote Clinics</div><div class="who-h">AI-assisted diagnosis where specialists aren't available. The AI fills the gap between a community health worker and a distant hospital.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- LANGUAGES -->
+<section class="lang-section" id="languages">
+  <div class="container">
+    <div class="sec-label fi" style="justify-content:center">42 Languages</div>
+    <h2 class="sec-title fi">If They Can Hear It, the System Can Speak It</h2>
+    <p class="sec-body fi" style="margin:0 auto">Every language below is fully supported — spoken aloud by the voice engine.</p>
+    <img src="language_globe.png" class="lang-globe-img fi" alt="Globe made of world language scripts"/>
+    <div class="lang-bubbles" id="langBubbles">
+      <!-- Pairs: [English name, native script, logo path or null] -->
+    </div>
+  </div>
+</section>
+
+<!-- WHY NOW -->
+<section class="why-section" id="why">
+  <div class="container">
+    <div class="sec-label fi">Why Right Now</div>
+    <h2 class="sec-title fi">Every Day This Sits on a Hard Drive Is a Day Someone Goes Unhelped</h2>
+    <p class="sec-body fi">Medical infrastructure is being destroyed faster than it can be rebuilt. International volunteers flood in — and can't talk to the people they're trying to save.</p>
+    <div class="zone-tags fi">
+      <span class="zone">Yemen</span><span class="zone">Sudan</span><span class="zone">Gaza</span><span class="zone">Ukraine</span><span class="zone">Myanmar</span><span class="zone">DRC</span>
+    </div>
+    <div class="why-quote fi">
+      <p>"A medic from France treating a patient in Sudan who speaks Arabic and Hausa has no way to explain a treatment plan, ask about allergies, or give discharge instructions. This system eliminates that gap entirely."</p>
+    </div>
+  </div>
+</section>
+
+<!-- COST -->
+<section class="cost-section">
+  <div class="container">
+    <div class="sec-label fi" style="justify-content:center">What It Costs to Use</div>
+    <div class="cost-box fi">
+      <div class="cost-big">$0</div>
+      <div class="cost-sub">Free to Download · Free to Deploy · Free Forever</div>
+      <p class="cost-copy">No licensing. No subscriptions. No vendor lock-in. The system runs on hardware medical organizations already own. <strong style="color:var(--teal)">Your donation funds hardware, training, and deployment</strong> — not software.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DONATE -->
+<section class="donate-section" id="donate">
+  <div class="container">
+    <div class="sec-label">Make an Impact</div>
+    <h2 class="sec-title">Help Us Get This Into the Field</h2>
+    <p class="sec-body">The code is ready. The system is ready. It just needs to get into the right hands. Your donation funds hardware for field deployment and training for those who need it most.</p>
+    <div class="amounts">
+      <button class="chip" onclick="selectChip(this,25)">$25</button>
+      <button class="chip active" onclick="selectChip(this,50)">$50</button>
+      <button class="chip" onclick="selectChip(this,100)">$100</button>
+      <button class="chip" onclick="selectChip(this,250)">$250</button>
+      <button class="chip" onclick="selectChip(this,500)">$500</button>
+    </div>
+    <div class="custom-row">
+      <span class="custom-prefix">$</span>
+      <input class="custom-input" id="customAmt" type="number" min="1" placeholder="Other amount" oninput="onCustomInput()"/>
+    </div>
+    <div class="cta-wrap">
+      <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" id="donateBtn" class="btn-p" style="font-size:15px;padding:20px 54px">♥ &nbsp;Donate Now</a>
+      <p class="donate-note">Secure payment powered by Stripe &nbsp;·&nbsp; All donations go directly to field deployment</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-tag" style="font-size:14px;margin-bottom:10px">❤️ From America with love &nbsp;·&nbsp; Home grown in the beautiful and talented state of Georgia 🍑</p>
+  <p class="footer-tag">Built with care for the people who run toward the worst moments in the world so the rest of us don't have to.</p>
+  <div class="footer-links">
+    <a href="https://7hermeticlabs.com" target="_blank">Main Website</a>
+    <a href="#problem">The Problem</a>
+    <a href="#solution">The Solution</a>
+    <a href="#languages">Languages</a>
+    <a href="#donate">Donate</a>
+  </div>
+  <p class="footer-copy">© 2026 Hermetic Labs. All rights reserved.</p>
+</footer>
+
+<!-- LANGUAGE MODAL -->
+<div class="lang-modal" id="langModal">
+  <div class="modal-bg" onclick="closeModal()"></div>
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-lang-name" id="modalLangName"></div>
+    <img id="modalImg" src="" alt="Logo" class="modal-img"/>
+    <div class="modal-native" id="modalNative"></div>
+  </div>
+</div>
+
+<script>
+// ─── LANGUAGE DATA ────────────────────────────────────────────
+// [English, Native, logo path or null]
+const langs = [
+  ["Arabic","العربية","Arabic/Arabic logo.png"],
+  ["Persian (Farsi-Dari)","فارسی / دری","Persian (Farsi-Dari)/Persian logo.png"],
+  ["Pashto","پښتو","Pashto/Pashto logo.png"],
+  ["Kurdish","Kurdî",null],
+  ["Ukrainian","Українська","Ukrainian/Ukrainian Logo.png"],
+  ["Russian","Русский","Russian/Russian logo.png"],
+  ["Amharic","አማርኛ","Amharic/Amharic.png"],
+  ["Somali","Soomaali","Somali/Somali logo.png"],
+  ["Swahili","Kiswahili",null],
+  ["Hausa","Hausa","Hausa/Hausa logo.png"],
+  ["Yoruba","Yorùbá",null],
+  ["Igbo","Igbo","Igbo/igbo.png"],
+  ["Zulu","isiZulu","Zulu/Zulu logo.png"],
+  ["Xhosa","isiXhosa","Xhosa/Xhosa logo.png"],
+  ["Malagasy","Malagasy",null],
+  ["French","Français","French/French logo.png"],
+  ["Spanish","Español","Spanish/Spanish logo.png"],
+  ["Portuguese","Português","Portuguese/Portuguese logo.png"],
+  ["Italian","Italiano","Italian/Italian logo.png"],
+  ["German","Deutsch","German/German logo.png"],
+  ["Dutch","Nederlands","Dutch/Dutch logo.png"],
+  ["Polish","Polski","Polish/Polish logo.png"],
+  ["Hindi","हिन्दी","Hindi/Hindi logo.png"],
+  ["Bengali","বাংলা","Bengali/Bengali logo.png"],
+  ["Marathi","मराठी","Marathi/Marathi logo.png"],
+  ["Tamil","தமிழ்","Tamil/Tamil logo.png"],
+  ["Telugu","తెలుగు","Telugu/Telugu logo.png"],
+  ["Urdu","اردو","Urdu/Urdu logo.png"],
+  ["Burmese","မြန်မာ","Burmese/Burmese logo.png"],
+  ["Thai","ภาษาไทย","Thai/Thai logo.png"],
+  ["Khmer","ខ្មែរ","Khmer/Khmer logo.png"],
+  ["Vietnamese","Tiếng Việt","Vietnamese/Vietnamese logo.png"],
+  ["Indonesian","Bahasa Indonesia","Indonesian/Indonesian logo.png"],
+  ["Javanese","Jawa",null],
+  ["Tagalog","Filipino",null],
+  ["Japanese","日本語","Japanese/Japanese logo.png"],
+  ["Korean","한국어","Korean/Korean logo.png"],
+  ["Chinese","中文","Chinese/Chinese logo.png"],
+  ["Hebrew","עברית","Hebrew/Hebrew logo.png"],
+  ["Turkish","Türkçe","Turkish/Turkish logo.png"],
+  ["Latin","Latina",null],
+];
+
+// Build language bubbles
+const container = document.getElementById('langBubbles');
+langs.forEach(([en, native, logo]) => {
+  // Native bubble
+  const nB = document.createElement('span');
+  nB.className = 'lang-bubble native' + (logo ? ' has-logo' : '');
+  nB.textContent = native;
+  if (logo) nB.onclick = () => openModal(en, native, logo);
+  container.appendChild(nB);
+  // English bubble
+  const eB = document.createElement('span');
+  eB.className = 'lang-bubble' + (logo ? ' has-logo' : '');
+  eB.textContent = en;
+  if (logo) eB.onclick = () => openModal(en, native, logo);
+  container.appendChild(eB);
+});
+
+// ─── MODAL ────────────────────────────────────────────────────
+function openModal(en, native, logo) {
+  document.getElementById('modalLangName').textContent = en;
+  document.getElementById('modalImg').src = logo;
+  document.getElementById('modalNative').textContent = native;
+  document.getElementById('langModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  document.getElementById('langModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ─── DONATE AMOUNT ────────────────────────────────────────────
+let selectedAmt = 50;
+function selectChip(btn, amt) {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  btn.classList.add('active');
+  selectedAmt = amt;
+  document.getElementById('customAmt').value = '';
+  updateDonateLink(amt);
+}
+function onCustomInput() {
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  const v = parseInt(document.getElementById('customAmt').value);
+  if (v > 0) { selectedAmt = v; updateDonateLink(v); }
+}
+const STRIPE_BASE = 'https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01';
+function getStripeUrl(amt) {
+  return amt ? `${STRIPE_BASE}?prefilled_amount=${Math.round(amt * 100)}` : STRIPE_BASE;
+}
+function updateDonateLink(amt) {
+  document.getElementById('donateBtn').href = getStripeUrl(amt);
+}
+updateDonateLink(selectedAmt);
+
+document.getElementById('donateBtn').addEventListener('click', function(e) {
+  e.preventDefault();
+  window.open(getStripeUrl(selectedAmt), '_blank');
+});
+
+// ─── SCROLL FADE IN ───────────────────────────────────────────
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('vis'), i * 75);
+      obs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+
+// ─── NAV ACTIVE ───────────────────────────────────────────────
+const secs = document.querySelectorAll('section[id]');
+const nLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+window.addEventListener('scroll', () => {
+  let cur = '';
+  secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+  nLinks.forEach(l => { l.style.color = l.getAttribute('href') === `#${cur}` ? 'var(--teal)' : ''; });
+});
+</script>
+</body>
+</html>
