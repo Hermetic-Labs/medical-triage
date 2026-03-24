@@ -54,15 +54,25 @@ h1.hero-h1 .hl{color:var(--teal);display:block}
 .hero-sub{font-family:'Montserrat',sans-serif;font-size:clamp(12px,1.8vw,16px);font-weight:300;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:16px}
 .hero-desc{max-width:640px;font-size:17px;line-height:1.8;color:var(--lgray);margin-bottom:32px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
-.hero-download{display:inline-flex;align-items:center;gap:8px;color:var(--gray);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:color .2s;position:relative;z-index:3}
-.hero-download:hover{color:var(--teal)}
-.hero-download::before{content:'↓';font-size:14px}
+/* PLATFORM DOWNLOAD BUTTONS */
+.dl-platforms{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px;position:relative;z-index:3}
+.btn-platform{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.2);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:13px 28px;border-radius:4px;white-space:nowrap;transition:border-color .2s,color .2s,background .2s,transform .15s,box-shadow .2s}
+.btn-platform:hover{border-color:var(--teal);color:var(--teal);background:rgba(69,177,145,.08);transform:translateY(-2px);box-shadow:0 0 24px rgba(69,177,145,.2)}
+.btn-platform svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+.hero-contribute{display:inline-flex;align-items:center;gap:8px;color:var(--gray);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;transition:color .2s;position:relative;z-index:3;margin-top:18px}
+.hero-contribute:hover{color:var(--teal)}
+.hero-contribute svg{width:16px;height:16px;fill:currentColor}
 /* DOWNLOAD CARD */
-.dl-card{margin-top:64px;padding:40px 48px;border:1px solid rgba(69,177,145,.3);border-radius:10px;background:linear-gradient(135deg,rgba(69,177,145,.08),rgba(69,177,145,.03));display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap}
+.dl-card{margin-top:64px;padding:40px 48px;border:1px solid rgba(69,177,145,.3);border-radius:10px;background:linear-gradient(135deg,rgba(69,177,145,.08),rgba(69,177,145,.03));display:flex;flex-direction:column;gap:24px}
 .dl-card-text .dl-title{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--white);margin-bottom:8px}
-.dl-card-text .dl-sub{font-size:14px;color:var(--gray);line-height:1.6;max-width:480px}
+.dl-card-text .dl-sub{font-size:14px;color:var(--gray);line-height:1.6;max-width:580px}
+.dl-card-buttons{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .btn-dl{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--teal);border:2px solid var(--teal);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:15px 32px;border-radius:4px;white-space:nowrap;transition:background .2s,color .2s,transform .15s,box-shadow .2s}
 .btn-dl:hover{background:var(--teal);color:#000;transform:translateY(-2px);box-shadow:0 0 30px rgba(69,177,145,.4)}
+.btn-dl svg{width:20px;height:20px;fill:currentColor;flex-shrink:0}
+.btn-gh{display:inline-flex;align-items:center;gap:10px;background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.2);font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:15px 28px;border-radius:4px;white-space:nowrap;transition:border-color .2s,color .2s,transform .15s}
+.btn-gh:hover{border-color:var(--teal);color:var(--teal);transform:translateY(-2px)}
+.btn-gh svg{width:18px;height:18px;fill:currentColor}
 .btn-p{display:inline-flex;align-items:center;gap:9px;background:var(--teal);color:#000;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:17px 38px;border-radius:4px;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(69,177,145,.3)}
 .btn-p:hover{background:#5dd5ad;transform:translateY(-2px);box-shadow:0 0 48px rgba(69,177,145,.5)}
 .btn-s{display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--white);font-family:'Montserrat',sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:17px 34px;border-radius:4px;border:1px solid rgba(255,255,255,.2);transition:border-color .2s,color .2s,transform .15s}
@@ -215,7 +225,20 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
     <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="btn-p">♥ &nbsp;Donate to the Cause</a>
     <a href="#solution" class="btn-s">Learn How It Works →</a>
   </div>
-  <a href="https://github.com/Hermetic-Labs/medical-triage" target="_blank" class="hero-download" id="heroDownloadBtn">Free Download — Hermetic Labs Triage (HALT)</a>
+  <div class="dl-platforms">
+    <a href="https://pub-b841d8ac01084f8f822078f923a49a87.r2.dev/HALT-latest-Windows.zip" class="btn-platform" title="Download for Windows">
+      <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+      Windows
+    </a>
+    <a href="https://pub-b841d8ac01084f8f822078f923a49a87.r2.dev/HALT-v1.0.1-alpha-macOS-arm64.zip" class="btn-platform" title="Download for macOS (Apple Silicon)">
+      <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+      macOS
+    </a>
+  </div>
+  <a href="https://github.com/Hermetic-Labs/halt" target="_blank" class="hero-contribute">
+    <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+    Help Build the Tools That Save Lives
+  </a>
   <div class="hero-scroll"><span></span>Scroll</div>
 </section>
 
@@ -277,10 +300,23 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
     <!-- DOWNLOAD CARD -->
     <div class="dl-card fi">
       <div class="dl-card-text">
-        <div class="dl-title">↓ &nbsp;Download Hermetic Labs Triage (HALT) — Free</div>
-        <div class="dl-sub">The system is real. It runs today. Download it and see for yourself — works on Windows, Mac, and Linux. No account required.</div>
+        <div class="dl-title">↓ &nbsp;Download HALT — Free &amp; Open Source</div>
+        <div class="dl-sub">The system is real. It runs today. Download it and see for yourself. Models auto-download on first launch. No account required.</div>
       </div>
-      <a href="https://github.com/Hermetic-Labs/medical-triage" target="_blank" id="solutionDownloadBtn" class="btn-dl">↓ &nbsp;Free Download</a>
+      <div class="dl-card-buttons">
+        <a href="https://pub-b841d8ac01084f8f822078f923a49a87.r2.dev/HALT-latest-Windows.zip" class="btn-dl">
+          <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
+          Windows
+        </a>
+        <a href="https://pub-b841d8ac01084f8f822078f923a49a87.r2.dev/HALT-v1.0.1-alpha-macOS-arm64.zip" class="btn-dl">
+          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
+          macOS
+        </a>
+        <a href="https://github.com/Hermetic-Labs/halt" target="_blank" class="btn-gh">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          Contribute on GitHub
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -377,6 +413,7 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
     <a href="#problem">The Problem</a>
     <a href="#solution">The Solution</a>
     <a href="#languages">Languages</a>
+    <a href="https://github.com/Hermetic-Labs/halt" target="_blank">GitHub</a>
     <a href="#donate">Donate</a>
   </div>
   <p class="footer-copy">© 2026 Hermetic Labs. All rights reserved.</p>
