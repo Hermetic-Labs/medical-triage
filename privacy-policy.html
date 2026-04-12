@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Privacy Policy — HALT | Hermetic Labs</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<meta name="description" content="HALT Privacy Policy — Zero telemetry, zero data collection, fully offline medical triage."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--black:#000;--near:#080808;--card:#0d0d0d;--border:rgba(255,255,255,.08);--teal:#45B191;--white:#fff;--gray:#a0a0a0;--lgray:#d0d0d0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:flex-end;padding:14px 48px;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--teal)}
+.content{max-width:800px;margin:0 auto;padding:120px 32px 80px}
+h1{font-family:'Montserrat',sans-serif;font-size:2.4rem;font-weight:700;margin-bottom:8px;color:var(--teal)}
+.subtitle{font-size:14px;color:var(--gray);margin-bottom:48px;letter-spacing:.04em}
+h2{font-family:'Montserrat',sans-serif;font-size:1.2rem;font-weight:600;margin:36px 0 12px;color:var(--lgray);letter-spacing:.02em}
+p,li{color:var(--gray);font-size:15px;line-height:1.8;margin-bottom:12px}
+ul{padding-left:20px;margin-bottom:16px}
+li{margin-bottom:6px}
+.highlight{background:rgba(69,177,145,.08);border-left:3px solid var(--teal);padding:16px 20px;border-radius:0 8px 8px 0;margin:24px 0}
+.highlight p{color:var(--lgray);margin:0;font-weight:500}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+.footer{text-align:center;padding:40px;border-top:1px solid var(--border);margin-top:60px;font-size:12px;color:var(--gray)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="privacy-policy.html">Privacy</a>
+    <a href="terms-of-service.html">Terms</a>
+  </div>
+</nav>
+
+<div class="content">
+  <h1>Privacy Policy</h1>
+  <p class="subtitle">Last updated: April 12, 2026 &nbsp;|&nbsp; Effective immediately</p>
+
+  <div class="highlight">
+    <p>HALT collects zero personal data, sends zero telemetry, and makes zero network requests to Hermetic Labs or any third party. Your data never leaves your device.</p>
+  </div>
+
+  <h2>1. Who We Are</h2>
+  <p>HALT (Hermetic Anonymous Local Triage) is developed by <strong>Hermetic Labs</strong>. This privacy policy applies to the HALT desktop application distributed via the Microsoft Store and direct download.</p>
+  <p>Contact: <a href="mailto:Frontdesk@7hermeticlabs.com">Frontdesk@7hermeticlabs.com</a></p>
+
+  <h2>2. Data We Collect</h2>
+  <p><strong>None.</strong> HALT is designed for air-gapped, offline operation in conflict zones and disaster response scenarios. The application:</p>
+  <ul>
+    <li>Does <strong>not</strong> collect personal information</li>
+    <li>Does <strong>not</strong> transmit telemetry, analytics, or crash reports</li>
+    <li>Does <strong>not</strong> require an account or login</li>
+    <li>Does <strong>not</strong> use cookies, trackers, or advertising SDKs</li>
+    <li>Does <strong>not</strong> phone home to any server</li>
+  </ul>
+
+  <h2>3. Data Stored Locally</h2>
+  <p>All data created within HALT — including patient records, triage assessments, chat messages, and translation caches — is stored exclusively on your local device. This includes:</p>
+  <ul>
+    <li><strong>Patient records:</strong> Stored in local JSON files within the application's data directory</li>
+    <li><strong>Chat messages:</strong> Stored locally for team mesh communication over your local network</li>
+    <li><strong>AI model data:</strong> All inference runs entirely on-device using locally stored models</li>
+    <li><strong>User preferences:</strong> Language, theme, and settings stored in browser localStorage</li>
+  </ul>
+  <p>You may delete all local data at any time by uninstalling the application or clearing the data directory.</p>
+
+  <h2>4. Network Communication</h2>
+  <p>HALT operates in two modes:</p>
+  <ul>
+    <li><strong>Fully offline (default):</strong> No network access required or attempted</li>
+    <li><strong>Local mesh mode:</strong> When enabled by the user, HALT communicates over your local WiFi network (LAN) for team coordination. This traffic never leaves your local network and is not routed through any external server.</li>
+  </ul>
+
+  <h2>5. AI & Medical Triage</h2>
+  <p>HALT includes an on-device AI model (MedGemma) for clinical triage assistance. All AI processing occurs locally — no queries are sent to cloud APIs. No patient data, prompts, or model outputs are transmitted externally.</p>
+
+  <h2>6. Children's Privacy</h2>
+  <p>HALT is a professional medical tool. It is not directed at children under 13 and does not knowingly collect data from children.</p>
+
+  <h2>7. Third-Party Services</h2>
+  <p>HALT uses <strong>zero</strong> third-party services, SDKs, or analytics platforms. The application is fully self-contained.</p>
+
+  <h2>8. Microsoft Store</h2>
+  <p>When you download HALT from the Microsoft Store, Microsoft may collect standard download and install telemetry per their own <a href="https://privacy.microsoft.com/en-us/privacystatement" target="_blank">Privacy Statement</a>. Hermetic Labs has no access to this data.</p>
+
+  <h2>9. Changes to This Policy</h2>
+  <p>If we ever modify this policy, we will update the "Last updated" date above. Given HALT's zero-collection architecture, material changes are unlikely.</p>
+
+  <h2>10. Contact</h2>
+  <p>For privacy questions or concerns:</p>
+  <ul>
+    <li>Email: <a href="mailto:Frontdesk@7hermeticlabs.com">Frontdesk@7hermeticlabs.com</a></li>
+    <li>Web: <a href="https://7hermeticlabs.health">https://7hermeticlabs.health</a></li>
+    <li>Source: <a href="https://github.com/Hermetic-Labs/halt" target="_blank">github.com/Hermetic-Labs/halt</a></li>
+  </ul>
+
+  <h2>11. Open Source License</h2>
+  <p>HALT is released under the <strong>MIT License</strong>. The full license text is available in the application's <a href="https://github.com/Hermetic-Labs/halt/blob/main/LICENSE" target="_blank">LICENSE</a> file.</p>
+</div>
+
+<div class="footer">
+  &copy; 2026 Hermetic Labs &nbsp;·&nbsp; MIT License &nbsp;·&nbsp; Zero Telemetry &nbsp;·&nbsp; Built for the field
+</div>
+
+</body>
+</html>
